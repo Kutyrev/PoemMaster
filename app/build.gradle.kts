@@ -48,8 +48,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.koin.android)
-    implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.bom)
     implementation(libs.androidx.material3.android)

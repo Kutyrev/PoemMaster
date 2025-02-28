@@ -2,6 +2,10 @@ package com.github.kutyrev.poemmaster.core
 
 import androidx.room.Room
 import com.github.kutyrev.poemmaster.datasource.database.DatabaseSource
+import com.github.kutyrev.poemmaster.repository.storage.DefaultStorageRepository
+import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -10,4 +14,8 @@ val databaseModule = module {
     }
 
     single { get<DatabaseSource>().poemMasterDao() }
+}
+
+val repositoryModule = module {
+    singleOf(::DefaultStorageRepository) { bind<StorageRepository>() }
 }

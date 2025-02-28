@@ -5,8 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 import com.github.kutyrev.poemmaster.core.BaseViewModel
+import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 
-class MainListViewModel: BaseViewModel<MainListEvent>() {
+class MainListViewModel(
+    private val storageRepository: StorageRepository
+): BaseViewModel<MainListEvent>() {
 
     var state by mutableStateOf(MainListState())
         private set
