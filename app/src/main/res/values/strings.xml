@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Poem Master</string>
+    <string name="list_fab_content_desc">Add poem</string>
 </resources>

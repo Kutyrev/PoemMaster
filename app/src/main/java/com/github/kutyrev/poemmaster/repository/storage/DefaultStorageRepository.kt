@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class DefaultStorageRepository(private val poemMasterDao: PoemMasterDao) : StorageRepository {
     override fun getPoemsList(): Flow<List<PoemHeader>> {
-        TODO("Not yet implemented")
+        return poemMasterDao.getPoemsList()
     }
 }

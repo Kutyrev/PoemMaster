@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.github.kutyrev.poemmaster.ui.mainlist.MainListRoute
 
 @Composable
 fun PoemMasterNavHost(
@@ -19,7 +20,7 @@ fun PoemMasterNavHost(
         modifier = modifier
     ) {
         composable<PoemMasterDestinations.Home> {
-
+            MainListRoute(navController)
         }
     }
 }
