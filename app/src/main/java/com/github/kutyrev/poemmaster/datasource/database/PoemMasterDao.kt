@@ -15,14 +15,14 @@ interface PoemMasterDao {
     fun getPoemsList(): Flow<List<PoemHeader>>
 
     @Query("SELECT * FROM poems WHERE id = :id")
-    fun getPoem(id: Int): Poem
+    fun getPoem(id: Long): Poem
 
     @Insert
-    fun insertPoem(poem: Poem) : Long
+    fun insertPoem() : Long
 
     @Update
-    fun updateSubtitlesInfo(poem: Poem)
+    fun updatePoem(poem: Poem)
 
     @Delete
-    fun deleteSubtitles(poem: Poem)
+    fun deletePoem(poem: Poem)
 }

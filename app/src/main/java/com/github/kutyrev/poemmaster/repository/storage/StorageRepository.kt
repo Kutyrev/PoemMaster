@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface StorageRepository {
     fun getPoemsList(): Flow<List<PoemHeader>>
+    fun addNewPoem(): Long
 }

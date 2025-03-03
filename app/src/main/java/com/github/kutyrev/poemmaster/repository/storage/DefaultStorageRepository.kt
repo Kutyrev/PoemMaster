@@ -8,4 +8,8 @@ class DefaultStorageRepository(private val poemMasterDao: PoemMasterDao) : Stora
     override fun getPoemsList(): Flow<List<PoemHeader>> {
         return poemMasterDao.getPoemsList()
     }
+
+    override fun addNewPoem() : Long {
+        return poemMasterDao.insertPoem()
+    }
 }

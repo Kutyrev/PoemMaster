@@ -24,6 +24,7 @@ class MainListViewModel(
     override fun handleEvent(event: MainListEvent) {
         when (event) {
             MainListEvent.GoToPoem -> TODO()
+            MainListEvent.AddNewPoem -> TODO()
         }
     }
 
@@ -34,6 +35,12 @@ class MainListViewModel(
                 .collect { poems ->
                     state = state.copy(poemsList = poems)
                 }
+        }
+    }
+
+    private fun addNewPoem() {
+        viewModelScope.launch {
+            val newPoemId = storageRepository.addNewPoem()
         }
     }
 }

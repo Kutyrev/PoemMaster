@@ -7,7 +7,7 @@ class PoemMasterApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            modules(databaseModule)
+            modules(databaseModule, repositoryModule)
         }
     }
 }
