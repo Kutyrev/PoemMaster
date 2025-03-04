@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MainListViewModel(
     private val storageRepository: StorageRepository
-) : BaseViewModel<MainListEvent>() {
+) : BaseViewModel<MainListEvent, MainListEffect>() {
 
     var state by mutableStateOf(MainListState())
         private set
@@ -23,8 +23,10 @@ class MainListViewModel(
 
     override fun handleEvent(event: MainListEvent) {
         when (event) {
-            MainListEvent.GoToPoem -> TODO()
             MainListEvent.AddNewPoem -> TODO()
+            is MainListEvent.GoToPoem -> viewModelScope.launch {
+                emitNewEffect(MainListEffect.ToPoem(event.poemId))
+            }
         }
     }
 

@@ -7,5 +7,5 @@ sealed class PoemMasterDestinations {
     data object Home
 
     @Serializable
-    data class PoemDestinations(val id: Int)
+    data class Poem(val id: Long)
 }

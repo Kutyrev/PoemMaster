@@ -1,5 +1,7 @@
 package com.github.kutyrev.poemmaster.ui.mainlist
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -15,6 +17,8 @@ import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListEvent
 import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.ui.res.dimensionResource
 
 @Composable
 fun MainListScreen(state: MainListState, onEvent: (MainListEvent) -> Unit) {
@@ -25,7 +29,14 @@ fun MainListScreen(state: MainListState, onEvent: (MainListEvent) -> Unit) {
     }) { paddingValues ->
         LazyColumn(modifier = Modifier.padding(paddingValues)) {
             items(state.poemsList) { poem ->
-                Text(poem.name)
+                ElevatedCard(
+                    modifier = Modifier
+                        .padding(dimensionResource(id = R.dimen.padding_std))
+                        .fillMaxWidth()
+                        .clickable(onClick = { onEvent(MainListEvent.GoToPoem(poem.id)) })
+                ) {
+                    Text(poem.name)
+                }
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.github.kutyrev.poemmaster.ui.mainlist.model
 
-sealed interface MainListEffect {
+import com.github.kutyrev.poemmaster.core.ViewEffect
+
+sealed interface MainListEffect : ViewEffect {
 
     data class ToPoem(
         val poemId: Long

@@ -20,7 +20,10 @@ fun PoemMasterNavHost(
         modifier = modifier
     ) {
         composable<PoemMasterDestinations.Home> {
-            MainListRoute(navController)
+            MainListRoute(goToPoemScreen = {
+                navController.navigate(PoemMasterDestinations.Poem(it))
+            })
         }
+        composable<PoemMasterDestinations.Poem> {  }
     }
 }
