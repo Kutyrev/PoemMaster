@@ -1,4 +1,4 @@
-package com.github.kutyrev.poemmaster.ui.mainlist
+package com.github.kutyrev.poemmaster.ui.screens.mainlist
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.github.kutyrev.poemmaster.R
-import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListEvent
-import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListState
+import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListEvent
+import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.ui.res.dimensionResource
@@ -23,7 +23,7 @@ import androidx.compose.ui.res.dimensionResource
 @Composable
 fun MainListScreen(state: MainListState, onEvent: (MainListEvent) -> Unit) {
     Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = TODO()) {
+        FloatingActionButton(onClick = { onEvent(MainListEvent.AddNewPoem) }) {
             Icon(Icons.Filled.Add, stringResource(R.string.list_fab_content_desc))
         }
     }) { paddingValues ->

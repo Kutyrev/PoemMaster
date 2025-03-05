@@ -1,4 +1,4 @@
-package com.github.kutyrev.poemmaster.ui.mainlist.model
+package com.github.kutyrev.poemmaster.ui.screens.mainlist.model
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +23,9 @@ class MainListViewModel(
 
     override fun handleEvent(event: MainListEvent) {
         when (event) {
-            MainListEvent.AddNewPoem -> TODO()
+            MainListEvent.AddNewPoem -> viewModelScope.launch {
+                addNewPoem()
+            }
             is MainListEvent.GoToPoem -> viewModelScope.launch {
                 emitNewEffect(MainListEffect.ToPoem(event.poemId))
             }
@@ -40,9 +42,8 @@ class MainListViewModel(
         }
     }
 
-    private fun addNewPoem() {
-        viewModelScope.launch {
-            val newPoemId = storageRepository.addNewPoem()
-        }
+    private suspend fun addNewPoem() {
+        val newPoemId = storageRepository.addNewPoem()
+        emitNewEffect(MainListEffect.ToPoem(newPoemId))
     }
 }

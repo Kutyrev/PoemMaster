@@ -5,6 +5,7 @@ import com.github.kutyrev.poemmaster.model.PoemHeader
 import kotlinx.coroutines.flow.Flow
 
 class DefaultStorageRepository(private val poemMasterDao: PoemMasterDao) : StorageRepository {
+
     override fun getPoemsList(): Flow<List<PoemHeader>> {
         return poemMasterDao.getPoemsList()
     }

@@ -1,4 +1,4 @@
-package com.github.kutyrev.poemmaster.ui.mainlist.model
+package com.github.kutyrev.poemmaster.ui.screens.mainlist.model
 
 import com.github.kutyrev.poemmaster.model.PoemHeader
 

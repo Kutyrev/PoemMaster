@@ -1,9 +1,9 @@
-package com.github.kutyrev.poemmaster.ui.mainlist
+package com.github.kutyrev.poemmaster.ui.screens.mainlist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListEffect
-import com.github.kutyrev.poemmaster.ui.mainlist.model.MainListViewModel
+import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListEffect
+import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
