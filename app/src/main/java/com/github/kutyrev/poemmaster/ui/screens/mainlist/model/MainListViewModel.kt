@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 
 import com.github.kutyrev.poemmaster.core.BaseViewModel
+import com.github.kutyrev.poemmaster.model.Poem
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ class MainListViewModel(
     }
 
     private suspend fun addNewPoem() {
-        val newPoemId = storageRepository.addNewPoem()
+        val newPoemId = storageRepository.addNewPoem(Poem())
         emitNewEffect(MainListEffect.ToPoem(newPoemId))
     }
 }

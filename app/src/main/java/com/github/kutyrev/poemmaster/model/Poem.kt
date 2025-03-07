@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "poems")
 data class Poem(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    var name: String,
-    var text: String
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    var name: String = "",
+    var text: String = ""
 )
