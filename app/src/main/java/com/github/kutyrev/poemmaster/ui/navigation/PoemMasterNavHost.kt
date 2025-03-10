@@ -7,8 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.github.kutyrev.poemmaster.ui.screens.detail.DetailRoute
 import com.github.kutyrev.poemmaster.ui.screens.mainlist.MainListRoute
-import com.github.kutyrev.poemmaster.ui.screens.poem.PoemRoute
 
 @Composable
 fun PoemMasterNavHost(
@@ -28,7 +28,7 @@ fun PoemMasterNavHost(
         }
         composable<PoemMasterDestinations.Poem> { backStackEntry ->
             val poemId = backStackEntry.toRoute<Long>()
-            PoemRoute(poemId)
+            DetailRoute(poemId)
         }
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MainListViewModel(
     private val storageRepository: StorageRepository
-) : BaseViewModel<MainListEvent, MainListEffect>() {
+) : BaseViewModel<MainListEvent, MainListEffect, MainListMode>() {
 
     var state by mutableStateOf(MainListState())
         private set

@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.github.kutyrev.poemmaster.datasource.database.DatabaseSource
 import com.github.kutyrev.poemmaster.repository.storage.DefaultStorageRepository
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
+import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailViewModel
 import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -24,4 +25,5 @@ val repositoryModule = module {
 
 val appModule = module {
     viewModel { MainListViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }
