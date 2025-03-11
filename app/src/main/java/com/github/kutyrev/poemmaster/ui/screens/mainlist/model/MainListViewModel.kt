@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-
 import com.github.kutyrev.poemmaster.core.BaseViewModel
 import com.github.kutyrev.poemmaster.model.Poem
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MainListViewModel(
     private val storageRepository: StorageRepository
-) : BaseViewModel<MainListEvent, MainListEffect, MainListMode>() {
+) : BaseViewModel<MainListEvent, MainListEffect>() {
 
     var state by mutableStateOf(MainListState())
         private set

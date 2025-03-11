@@ -1,3 +1,5 @@
 package com.github.kutyrev.poemmaster.ui.screens.detail.model
 
-data class DetailState(val poemId: Long = 0L)
+import com.github.kutyrev.poemmaster.model.Poem
+
+data class DetailState(val poem: Poem = Poem(), val isEditMode: Boolean = false)

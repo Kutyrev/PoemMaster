@@ -11,6 +11,8 @@ fun DetailRoute(
     viewModel: DetailViewModel = koinViewModel<DetailViewModel>()) {
 
     LaunchedEffect(Unit) {
-        viewModel.loadPoemText(poemId)
+        viewModel.loadPoem(poemId)
     }
+
+    DetailScreen(viewModel.state.poem, viewModel.state.isEditMode)
 }

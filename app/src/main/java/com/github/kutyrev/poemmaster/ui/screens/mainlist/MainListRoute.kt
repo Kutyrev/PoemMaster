@@ -19,5 +19,5 @@ fun MainListRoute(
         }
     }
 
-    MainListScreen(viewModel.state, viewModel::handleEvent)
+    MainListScreen(viewModel.state.poemsList, viewModel::handleEvent)
 }
