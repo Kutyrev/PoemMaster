@@ -14,5 +14,5 @@ fun DetailRoute(
         viewModel.loadPoem(poemId)
     }
 
-    DetailScreen(viewModel.state.poem, viewModel.state.isEditMode)
+    DetailScreen(viewModel.state.poem, viewModel.state.isEditMode, viewModel.state.hidePercent, viewModel::handleEvent)
 }

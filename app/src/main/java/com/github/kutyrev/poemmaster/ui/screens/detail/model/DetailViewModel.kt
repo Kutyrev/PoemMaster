@@ -14,12 +14,29 @@ class DetailViewModel(private val storageRepository: StorageRepository): BaseVie
         private set
 
     override fun handleEvent(event: DetailEvent) {
-        TODO("Not yet implemented")
+        state = when(event) {
+            DetailEvent.changeIsEditMode -> {
+                state.copy(isEditMode = !state.isEditMode)
+            }
+
+            DetailEvent.changeHidePercentage -> {
+                state.copy(hidePercent = changeHidePercentage(state.hidePercent))
+            }
+        }
     }
 
     fun loadPoem(poemId: Long) {
         viewModelScope.launch {
             state = state.copy(poem = storageRepository.getPoem(poemId))
         }
+    }
+
+    private fun changeHidePercentage(currentPercentage: Int): Int {
+        return if (currentPercentage == 100) 0 else
+            currentPercentage + 20
+    }
+
+    private fun generateAnnotatedPoem() {
+
     }
 }
