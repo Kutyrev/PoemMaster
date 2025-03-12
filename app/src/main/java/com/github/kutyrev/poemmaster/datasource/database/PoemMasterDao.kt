@@ -18,7 +18,7 @@ interface PoemMasterDao {
     fun getPoem(id: Long): Poem
 
     @Insert
-    fun insertPoem(poem: Poem) : Long
+    fun insertPoem(poem: Poem): Long
 
     @Update
     fun updatePoem(poem: Poem)

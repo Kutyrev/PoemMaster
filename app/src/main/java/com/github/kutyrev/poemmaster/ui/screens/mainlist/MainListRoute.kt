@@ -13,7 +13,7 @@ fun MainListRoute(
 ) {
     LaunchedEffect(Unit) {
         viewModel.effect.collect {
-            when(it) {
+            when (it) {
                 is MainListEffect.ToPoem -> goToPoemScreen(it.poemId)
             }
         }

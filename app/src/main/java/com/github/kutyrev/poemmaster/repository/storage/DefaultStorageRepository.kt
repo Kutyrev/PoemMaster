@@ -11,7 +11,7 @@ class DefaultStorageRepository(private val poemMasterDao: PoemMasterDao) : Stora
         return poemMasterDao.getPoemsList()
     }
 
-    override fun addNewPoem(poem: Poem) : Long {
+    override fun addNewPoem(poem: Poem): Long {
         return poemMasterDao.insertPoem(poem)
     }
 

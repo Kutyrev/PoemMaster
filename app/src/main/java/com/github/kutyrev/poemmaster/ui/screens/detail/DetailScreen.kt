@@ -21,7 +21,12 @@ import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(poem: Poem, isEditMode: Boolean, hidePercent: Int, onEvent: (DetailEvent) -> Unit) {
+fun DetailScreen(
+    poem: Poem,
+    isEditMode: Boolean,
+    hidePercent: Int,
+    onEvent: (DetailEvent) -> Unit
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -41,7 +46,9 @@ fun DetailScreen(poem: Poem, isEditMode: Boolean, hidePercent: Int, onEvent: (De
                         Text(text = hidePercent.toString().plus(" %"))
                     }
                     Text(text = stringResource(R.string.edit_mode))
-                    Switch(checked = isEditMode, onCheckedChange = { onEvent(DetailEvent.changeIsEditMode) })
+                    Switch(
+                        checked = isEditMode,
+                        onCheckedChange = { onEvent(DetailEvent.changeIsEditMode) })
                 }
             )
         }

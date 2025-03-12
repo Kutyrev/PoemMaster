@@ -7,12 +7,18 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailRoute(
-    poemId : Long,
-    viewModel: DetailViewModel = koinViewModel<DetailViewModel>()) {
+    poemId: Long,
+    viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
+) {
 
     LaunchedEffect(Unit) {
         viewModel.loadPoem(poemId)
     }
 
-    DetailScreen(viewModel.state.poem, viewModel.state.isEditMode, viewModel.state.hidePercent, viewModel::handleEvent)
+    DetailScreen(
+        viewModel.state.poem,
+        viewModel.state.isEditMode,
+        viewModel.state.hidePercent,
+        viewModel::handleEvent
+    )
 }

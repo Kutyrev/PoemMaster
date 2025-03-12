@@ -8,13 +8,14 @@ import com.github.kutyrev.poemmaster.core.BaseViewModel
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val storageRepository: StorageRepository): BaseViewModel<DetailEvent, DetailEffect>() {
+class DetailViewModel(private val storageRepository: StorageRepository) :
+    BaseViewModel<DetailEvent, DetailEffect>() {
 
     var state by mutableStateOf(DetailState())
         private set
 
     override fun handleEvent(event: DetailEvent) {
-        state = when(event) {
+        state = when (event) {
             DetailEvent.changeIsEditMode -> {
                 state.copy(isEditMode = !state.isEditMode)
             }

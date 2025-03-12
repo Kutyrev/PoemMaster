@@ -26,6 +26,7 @@ class MainListViewModel(
             MainListEvent.AddNewPoem -> viewModelScope.launch {
                 addNewPoem()
             }
+
             is MainListEvent.GoToPoem -> viewModelScope.launch {
                 emitNewEffect(MainListEffect.ToPoem(event.poemId))
             }
