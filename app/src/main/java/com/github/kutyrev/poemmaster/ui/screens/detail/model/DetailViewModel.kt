@@ -5,8 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.github.kutyrev.poemmaster.core.BaseViewModel
+import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import kotlinx.coroutines.launch
+
+private const val SPACE = " "
 
 class DetailViewModel(private val storageRepository: StorageRepository) :
     BaseViewModel<DetailEvent, DetailEffect>() {
@@ -28,7 +31,9 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
     fun loadPoem(poemId: Long) {
         viewModelScope.launch {
-            state = state.copy(poem = storageRepository.getPoem(poemId))
+            val poem = storageRepository.getPoem(poemId)
+            val poemWords: List<PoemWordVisualization> = poem.text.split(SPACE).map { PoemWordVisualization(it) }
+            state = state.copy(poem = poem, poemWords = poemWords)
         }
     }
 

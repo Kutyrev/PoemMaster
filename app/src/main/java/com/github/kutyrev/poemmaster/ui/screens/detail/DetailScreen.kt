@@ -17,12 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.model.Poem
+import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     poem: Poem,
+    poemWords: List<PoemWordVisualization>,
     isEditMode: Boolean,
     hidePercent: Int,
     onEvent: (DetailEvent) -> Unit

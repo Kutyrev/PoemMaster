@@ -17,6 +17,7 @@ fun DetailRoute(
 
     DetailScreen(
         viewModel.state.poem,
+        viewModel.state.poemWords,
         viewModel.state.isEditMode,
         viewModel.state.hidePercent,
         viewModel::handleEvent
