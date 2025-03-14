@@ -43,8 +43,10 @@ class MainListViewModel(
         }
     }
 
-    private suspend fun addNewPoem() {
-        val newPoemId = storageRepository.addNewPoem(Poem())
-        emitNewEffect(MainListEffect.ToPoem(newPoemId))
+    private fun addNewPoem() {
+        viewModelScope.launch {
+            val newPoemId = storageRepository.addNewPoem(Poem())
+            emitNewEffect(MainListEffect.ToPoem(newPoemId))
+        }
     }
 }
