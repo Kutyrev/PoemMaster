@@ -25,15 +25,15 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import com.github.kutyrev.poemmaster.R
-import com.github.kutyrev.poemmaster.model.Poem
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    poem: Poem,
+    poemName: String,
     poemWords: List<PoemWordVisualization>,
+    poemText: String,
     isEditMode: Boolean,
     hidePercent: Int,
     onEvent: (DetailEvent) -> Unit
@@ -42,7 +42,7 @@ fun DetailScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(poem.name)
+                    Text(poemName)
                 },
                 navigationIcon = {
                     IconButton(onClick = { TODO() }) {
@@ -67,8 +67,8 @@ fun DetailScreen(
         Surface(modifier = Modifier.padding(paddingValues)) {
             if (isEditMode) {
                 Column {
-                    TextField(value = poem.name, onValueChange = { TODO() })
-                    TextField(value = poem.text, onValueChange = { TODO() })
+                    TextField(value = poemName, onValueChange = { onEvent(DetailEvent.ChangePoemName(it)) })
+                    TextField(value = poemText, onValueChange = { TODO() })
                 }
             } else {
                 Text(

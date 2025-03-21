@@ -16,10 +16,11 @@ fun DetailRoute(
     }
 
     DetailScreen(
-        viewModel.state.poem,
-        viewModel.state.poemWords,
-        viewModel.state.isEditMode,
-        viewModel.state.hidePercent,
-        viewModel::handleEvent
+        poemName = viewModel.state.poemName,
+        poemWords = viewModel.state.poemWords,
+        poemText = viewModel.state.poemText,
+        isEditMode = viewModel.state.isEditMode,
+        hidePercent = viewModel.state.hidePercent,
+        onEvent = viewModel::handleEvent
     )
 }

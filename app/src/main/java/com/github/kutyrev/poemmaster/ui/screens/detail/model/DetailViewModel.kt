@@ -32,6 +32,10 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
             is DetailEvent.AnnotatedWordClick -> {
                 event.annotatedWord.isHided = !event.annotatedWord.isHided
             }
+
+            is DetailEvent.ChangePoemName -> {
+                state = state.copy(poemName = event.name)
+            }
         }
     }
 
@@ -41,7 +45,7 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
             val poemWords: List<PoemWordVisualization> =
                 poem.text.split(SPACE).map { PoemWordVisualization(it) }
             state =
-                state.copy(poem = poem, poemWords = poemWords, isEditMode = poemWords.isNotEmpty())
+                state.copy(poem = poem, poemName = poem.name, poemText = poem.text, poemWords = poemWords, isEditMode = poemWords.isNotEmpty())
         }
     }
 

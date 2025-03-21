@@ -7,5 +7,7 @@ data class DetailState(
     val poem: Poem = Poem(),
     val isEditMode: Boolean = false,
     val hidePercent: Int = 0,
+    val poemName: String = "",
+    val poemText: String = "",
     val poemWords: List<PoemWordVisualization> = listOf<PoemWordVisualization>()
 )
