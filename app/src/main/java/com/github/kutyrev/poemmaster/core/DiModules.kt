@@ -6,9 +6,10 @@ import com.github.kutyrev.poemmaster.repository.storage.DefaultStorageRepository
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailViewModel
 import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListViewModel
-import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.singleOf
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.qualifier.named
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -19,8 +20,14 @@ val databaseModule = module {
     single { get<DatabaseSource>().poemMasterDao() }
 }
 
+val dispatchersModule = module {
+    single(named("IODispatcher")) {
+        Dispatchers.IO
+    }
+}
+
 val repositoryModule = module {
-    singleOf(::DefaultStorageRepository) { bind<StorageRepository>() }
+    single { DefaultStorageRepository(get(), get(named("IODispatcher"))) } bind StorageRepository::class
 }
 
 val appModule = module {

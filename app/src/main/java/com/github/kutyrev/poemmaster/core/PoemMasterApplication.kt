@@ -9,7 +9,7 @@ class PoemMasterApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@PoemMasterApplication)
-            modules(databaseModule, repositoryModule, appModule)
+            modules(databaseModule, repositoryModule, appModule, dispatchersModule)
         }
     }
 }

@@ -5,7 +5,7 @@ import com.github.kutyrev.poemmaster.model.PoemHeader
 import kotlinx.coroutines.flow.Flow
 
 interface StorageRepository {
-    fun getPoemsList(): Flow<List<PoemHeader>>
-    fun addNewPoem(poem: Poem): Long
-    fun getPoem(poemId: Long): Poem
+    suspend fun getPoemsList(): Flow<List<PoemHeader>>
+    suspend fun addNewPoem(poem: Poem): Long
+    suspend fun getPoem(poemId: Long): Poem
 }
