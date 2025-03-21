@@ -1,5 +1,6 @@
 package com.github.kutyrev.poemmaster.ui.screens.detail
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -65,7 +66,10 @@ fun DetailScreen(
     ) { paddingValues ->
         Surface(modifier = Modifier.padding(paddingValues)) {
             if (isEditMode) {
-                TextField(value = poem.text, onValueChange = { TODO() })
+                Column {
+                    TextField(value = poem.name, onValueChange = { TODO() })
+                    TextField(value = poem.text, onValueChange = { TODO() })
+                }
             } else {
                 Text(
                     buildAnnotatedString {
