@@ -8,6 +8,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DetailRoute(
     poemId: Long,
+    goBack: () -> Unit,
     viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
 ) {
 
@@ -21,6 +22,7 @@ fun DetailRoute(
         poemText = viewModel.state.poemText,
         isEditMode = viewModel.state.isEditMode,
         hidePercent = viewModel.state.hidePercent,
-        onEvent = viewModel::handleEvent
+        onEvent = viewModel::handleEvent,
+        goBack = goBack
     )
 }

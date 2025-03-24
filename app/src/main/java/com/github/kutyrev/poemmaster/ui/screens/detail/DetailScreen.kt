@@ -40,7 +40,8 @@ fun DetailScreen(
     poemText: String,
     isEditMode: Boolean,
     hidePercent: Int,
-    onEvent: (DetailEvent) -> Unit
+    onEvent: (DetailEvent) -> Unit,
+    goBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -49,7 +50,7 @@ fun DetailScreen(
                     Text(poemName)
                 },
                 navigationIcon = {
-                    IconButton(onClick = { TODO() }) {
+                    IconButton(onClick = goBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.back_to_list)

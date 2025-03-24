@@ -27,9 +27,8 @@ fun PoemMasterNavHost(
             })
         }
         composable<PoemMasterDestinations.Poem> { backStackEntry ->
-            println(backStackEntry)
             val poem = backStackEntry.toRoute<PoemMasterDestinations.Poem>()
-            DetailRoute(poem.id)
+            DetailRoute(poemId = poem.id, goBack = { navController.navigateUp() })
         }
     }
 }
