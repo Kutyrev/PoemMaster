@@ -8,4 +8,5 @@ interface StorageRepository {
     suspend fun getPoemsList(): Flow<List<PoemHeader>>
     suspend fun addNewPoem(poem: Poem): Long
     suspend fun getPoem(poemId: Long): Poem
+    suspend fun updatePoem(poem: Poem)
 }

@@ -8,4 +8,5 @@ sealed interface DetailEvent : ViewEvent {
     object ChangeHidePercentage : DetailEvent
     class AnnotatedWordClick(val annotatedWord: PoemWordVisualization) : DetailEvent
     class ChangePoemName(val name: String) : DetailEvent
+    class ChangePoemText(val text: String) : DetailEvent
 }

@@ -1,6 +1,8 @@
 package com.github.kutyrev.poemmaster.ui.screens.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -17,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -27,6 +30,7 @@ import androidx.compose.ui.text.withStyle
 import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
+import com.github.kutyrev.poemmaster.ui.screens.detail.model.SPACE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,9 +70,14 @@ fun DetailScreen(
     ) { paddingValues ->
         Surface(modifier = Modifier.padding(paddingValues)) {
             if (isEditMode) {
-                Column {
-                    TextField(value = poemName, onValueChange = { onEvent(DetailEvent.ChangePoemName(it)) })
-                    TextField(value = poemText, onValueChange = { TODO() })
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    TextField(
+                        value = poemName,
+                        onValueChange = { onEvent(DetailEvent.ChangePoemName(it)) })
+                    Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_std)))
+                    TextField(
+                        value = poemText,
+                        onValueChange = { onEvent(DetailEvent.ChangePoemText(it)) })
                 }
             } else {
                 Text(
@@ -84,7 +93,7 @@ fun DetailScreen(
                                     tag = annotatedWord.word,
                                     styles = TextLinkStyles(style = textStyle)
                                 ) { onEvent(DetailEvent.AnnotatedWordClick(annotatedWord)) }) {
-                                append(annotatedWord.word + " ")
+                                append(annotatedWord.word + SPACE)
                             }
                         }
                     }

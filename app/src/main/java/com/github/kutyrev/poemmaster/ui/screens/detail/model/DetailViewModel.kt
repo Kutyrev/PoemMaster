@@ -9,7 +9,7 @@ import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import kotlinx.coroutines.launch
 
-private const val SPACE = " "
+const val SPACE = " "
 
 class DetailViewModel(private val storageRepository: StorageRepository) :
     BaseViewModel<DetailEvent, DetailEffect>() {
@@ -20,7 +20,22 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
     override fun handleEvent(event: DetailEvent) {
         when (event) {
             DetailEvent.ChangeIsEditMode -> {
-                state = state.copy(isEditMode = !state.isEditMode)
+                val newIsEditMode = !state.isEditMode
+
+                if (newIsEditMode == false) {
+                    val poemWords: List<PoemWordVisualization> =
+                        state.poemText.split(SPACE).map { PoemWordVisualization(it) }
+                    state.poem.text = state.poemText
+                    state.poem.name = state.poemName
+
+                    state = state.copy(isEditMode = newIsEditMode, poemWords = poemWords)
+
+                    viewModelScope.launch {
+                        storageRepository.updatePoem(state.poem)
+                    }
+                } else {
+                    state = state.copy(isEditMode = newIsEditMode)
+                }
             }
 
             DetailEvent.ChangeHidePercentage -> {
@@ -35,6 +50,10 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
             is DetailEvent.ChangePoemName -> {
                 state = state.copy(poemName = event.name)
+            }
+
+            is DetailEvent.ChangePoemText -> {
+                state = state.copy(poemText = event.text)
             }
         }
     }
@@ -58,18 +77,21 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
         poemWords: List<PoemWordVisualization>,
         hidePercent: Int
     ): List<PoemWordVisualization> {
+        val newPoemWords = mutableListOf<PoemWordVisualization>()
+        newPoemWords.addAll(poemWords)
+
         if (hidePercent == 0) {
-            poemWords.forEach { it.isHided = false }
+            newPoemWords.forEach { it.isHided = false }
         }
 
-        var wordsToHide = poemWords.size * hidePercent / 100
-        val alreadyHided = poemWords.filter { it.isHided }.size
+        var wordsToHide = newPoemWords.size * hidePercent / 100
+        val alreadyHided = newPoemWords.filter { it.isHided }.size
         wordsToHide -= alreadyHided
 
         repeat(wordsToHide) {
-            poemWords.filter { it.isHided }.randomOrNull()?.isHided = true
+            newPoemWords.filter { !it.isHided }.randomOrNull()?.isHided = true
         }
 
-        return poemWords
+        return newPoemWords
     }
 }

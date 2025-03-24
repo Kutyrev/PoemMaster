@@ -27,4 +27,10 @@ class DefaultStorageRepository(
         withContext(dispatcher) {
             poemMasterDao.getPoem(poemId)
         }
+
+    override suspend fun updatePoem(poem: Poem) {
+        withContext(dispatcher) {
+            poemMasterDao.updatePoem(poem)
+        }
+    }
 }
