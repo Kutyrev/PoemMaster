@@ -34,22 +34,23 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
                         storageRepository.updatePoem(state.poem)
                     }
                 } else {
-                    state = state.copy(isEditMode = newIsEditMode)
+                    state = state.copy(isEditMode = newIsEditMode, numberOfOpenedWords = 0)
                 }
             }
 
             DetailEvent.ChangeHidePercentage -> {
                 val hidePercent = changeHidePercentage(state.hidePercent)
                 val poemWords = generateAnnotatedPoem(state.poemWords, hidePercent)
-                state = state.copy(hidePercent = hidePercent, poemWords = poemWords)
+                state = state.copy(hidePercent = hidePercent, numberOfOpenedWords = 0, poemWords = poemWords)
             }
 
             is DetailEvent.AnnotatedWordClick -> {
                 //TODO Fix
-                val newPoemWords = mutableListOf<PoemWordVisualization>()
                 event.annotatedWord.isHided = !event.annotatedWord.isHided
-                newPoemWords.addAll(state.poemWords)
-                state = state.copy(poemWords = newPoemWords)
+
+                if (!event.annotatedWord.isHided) {
+                    state = state.copy(numberOfOpenedWords = state.numberOfOpenedWords.inc())
+                }
             }
 
             is DetailEvent.ChangePoemName -> {

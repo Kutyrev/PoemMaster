@@ -25,8 +25,8 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withLink
-import androidx.compose.ui.text.withStyle
 import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
@@ -40,6 +40,7 @@ fun DetailScreen(
     poemText: String,
     isEditMode: Boolean,
     hidePercent: Int,
+    numberOpened: Int,
     onEvent: (DetailEvent) -> Unit,
     goBack: () -> Unit
 ) {
@@ -61,7 +62,9 @@ fun DetailScreen(
                     OutlinedButton(onClick = { onEvent(DetailEvent.ChangeHidePercentage) }) {
                         Text(text = hidePercent.toString().plus(" %"))
                     }
+                    Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))
                     Text(text = stringResource(R.string.edit_mode))
+                    Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))
                     Switch(
                         checked = isEditMode,
                         onCheckedChange = { onEvent(DetailEvent.ChangeIsEditMode) })
@@ -81,24 +84,30 @@ fun DetailScreen(
                         onValueChange = { onEvent(DetailEvent.ChangePoemText(it)) })
                 }
             } else {
-                Text(
-                    buildAnnotatedString {
-                        for (annotatedWord in poemWords) {
-
-                            withStyle(style = SpanStyle()) { }
-
-                            val textStyle =
-                                if (annotatedWord.isHided) SpanStyle(background = MaterialTheme.colorScheme.onBackground) else SpanStyle()
-                            withLink(
-                                LinkAnnotation.Clickable(
-                                    tag = annotatedWord.word,
-                                    styles = TextLinkStyles(style = textStyle)
-                                ) { onEvent(DetailEvent.AnnotatedWordClick(annotatedWord)) }) {
-                                append(annotatedWord.word + SPACE)
+                Column(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std))) {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(R.string.number_of_opened, numberOpened),
+                        textAlign = TextAlign.Right
+                    )
+                    Text(
+                        text = buildAnnotatedString {
+                            for (annotatedWord in poemWords) {
+                                val textStyle =
+                                    if (annotatedWord.isHided) SpanStyle(
+                                        background = MaterialTheme.colorScheme.onBackground
+                                    ) else SpanStyle()
+                                withLink(
+                                    LinkAnnotation.Clickable(
+                                        tag = annotatedWord.word,
+                                        styles = TextLinkStyles(style = textStyle)
+                                    ) { onEvent(DetailEvent.AnnotatedWordClick(annotatedWord)) }) {
+                                    append(annotatedWord.word + SPACE)
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }

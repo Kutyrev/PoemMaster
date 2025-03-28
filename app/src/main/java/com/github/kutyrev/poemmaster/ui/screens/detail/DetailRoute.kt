@@ -22,6 +22,7 @@ fun DetailRoute(
         poemText = viewModel.state.poemText,
         isEditMode = viewModel.state.isEditMode,
         hidePercent = viewModel.state.hidePercent,
+        numberOpened = viewModel.state.numberOfOpenedWords,
         onEvent = viewModel::handleEvent,
         goBack = goBack
     )

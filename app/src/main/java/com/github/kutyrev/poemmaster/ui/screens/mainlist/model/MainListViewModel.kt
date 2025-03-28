@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.kutyrev.poemmaster.core.BaseViewModel
 import com.github.kutyrev.poemmaster.model.Poem
 import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
+import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListEffect.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,11 @@ class MainListViewModel(
             }
 
             is MainListEvent.GoToPoem -> viewModelScope.launch {
-                emitNewEffect(MainListEffect.ToPoem(event.poemId))
+                emitNewEffect(ToPoem(event.poemId))
+            }
+
+            is MainListEvent.DeleteSwipePerformed -> viewModelScope.launch {
+                emitNewEffect(ShowSwipeToDeleteConfirmSnackbar(event.poemHeader))
             }
         }
     }
@@ -46,7 +51,7 @@ class MainListViewModel(
     private fun addNewPoem() {
         viewModelScope.launch {
             val newPoemId = storageRepository.addNewPoem(Poem())
-            emitNewEffect(MainListEffect.ToPoem(newPoemId))
+            emitNewEffect(ToPoem(newPoemId))
         }
     }
 }

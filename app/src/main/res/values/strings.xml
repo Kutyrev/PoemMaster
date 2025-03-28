@@ -3,4 +3,7 @@
     <string name="list_fab_content_desc">Add poem</string>
     <string name="back_to_list">Back to list</string>
     <string name="edit_mode">Edit mode</string>
+    <string name="snackbar_undo_button">Undo</string>
+    <string name="snackbar_deleting">Deleting %1$s</string>
+    <string name="number_of_opened">Number of opened words: %1$d.</string>
 </resources>

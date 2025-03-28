@@ -9,5 +9,6 @@ data class DetailState(
     val hidePercent: Int = 0,
     val poemName: String = "",
     val poemText: String = "",
+    val numberOfOpenedWords: Int = 0,
     val poemWords: List<PoemWordVisualization> = listOf<PoemWordVisualization>()
 )
