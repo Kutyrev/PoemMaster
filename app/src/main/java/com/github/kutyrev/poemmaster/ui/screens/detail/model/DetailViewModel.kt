@@ -34,14 +34,22 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
                         storageRepository.updatePoem(state.poem)
                     }
                 } else {
-                    state = state.copy(isEditMode = newIsEditMode, numberOfOpenedWords = 0)
+                    state = state.copy(
+                        isEditMode = newIsEditMode,
+                        numberOfOpenedWords = 0,
+                        hidePercent = 0
+                    )
                 }
             }
 
             DetailEvent.ChangeHidePercentage -> {
                 val hidePercent = changeHidePercentage(state.hidePercent)
                 val poemWords = generateAnnotatedPoem(state.poemWords, hidePercent)
-                state = state.copy(hidePercent = hidePercent, numberOfOpenedWords = 0, poemWords = poemWords)
+                state = state.copy(
+                    hidePercent = hidePercent,
+                    numberOfOpenedWords = 0,
+                    poemWords = poemWords
+                )
             }
 
             is DetailEvent.AnnotatedWordClick -> {
@@ -69,7 +77,13 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
             val poemWords: List<PoemWordVisualization> =
                 poem.text.split(SPACE).filter { it.isNotEmpty() }.map { PoemWordVisualization(it) }
             state =
-                state.copy(poem = poem, poemName = poem.name, poemText = poem.text, poemWords = poemWords, isEditMode = poemWords.isEmpty())
+                state.copy(
+                    poem = poem,
+                    poemName = poem.name,
+                    poemText = poem.text,
+                    poemWords = poemWords,
+                    isEditMode = poemWords.isEmpty()
+                )
         }
     }
 

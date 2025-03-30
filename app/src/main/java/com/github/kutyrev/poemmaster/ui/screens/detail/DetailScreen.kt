@@ -2,6 +2,7 @@ package com.github.kutyrev.poemmaster.ui.screens.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -76,11 +77,23 @@ fun DetailScreen(
             if (isEditMode) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     TextField(
+                        modifier = Modifier
+                            .padding(dimensionResource(R.dimen.padding_std))
+                            .fillMaxWidth(),
                         value = poemName,
+                        placeholder = {
+                            Text(stringResource(R.string.placeholder_title))
+                        },
                         onValueChange = { onEvent(DetailEvent.ChangePoemName(it)) })
                     Spacer(modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_std)))
                     TextField(
+                        modifier = Modifier
+                            .padding(dimensionResource(R.dimen.padding_std))
+                            .fillMaxSize(),
                         value = poemText,
+                        placeholder = {
+                            Text(stringResource(R.string.text_to_remember))
+                        },
                         onValueChange = { onEvent(DetailEvent.ChangePoemText(it)) })
                 }
             } else {

@@ -33,7 +33,12 @@ class MainListViewModel(
             }
 
             is MainListEvent.DeleteSwipePerformed -> viewModelScope.launch {
+                state.poemsList.remove(event.poemHeader)
                 emitNewEffect(ShowSwipeToDeleteConfirmSnackbar(event.poemHeader))
+            }
+
+            is MainListEvent.DeleteSnackbarActionPerformed -> {
+                state.poemsList.add(event.poemHeader.id.toInt() - 1, event.poemHeader)
             }
         }
     }
@@ -43,7 +48,8 @@ class MainListViewModel(
             storageRepository.getPoemsList()
                 .catch { }
                 .collect { poems ->
-                    state = state.copy(poemsList = poems)
+                    state.poemsList.clear()
+                    state.poemsList.addAll(poems)
                 }
         }
     }

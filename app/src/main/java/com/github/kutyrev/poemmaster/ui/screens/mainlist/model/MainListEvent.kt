@@ -7,4 +7,5 @@ sealed interface MainListEvent : ViewEvent {
     class GoToPoem(val poemId: Long) : MainListEvent
     object AddNewPoem : MainListEvent
     class DeleteSwipePerformed(val poemHeader: PoemHeader): MainListEvent
+    class DeleteSnackbarActionPerformed(val poemHeader: PoemHeader): MainListEvent
 }

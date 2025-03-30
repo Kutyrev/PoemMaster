@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -65,14 +66,17 @@ fun MainListScreen(
                                 R.string.snackbar_deleting,
                                 it.poemHeader.name
                             ),
-                            actionLabel = context.getString(R.string.snackbar_undo_button)
+                            actionLabel = context.getString(R.string.snackbar_undo_button),
+                            duration = SnackbarDuration.Long
                         )
                         when (snackbarResult) {
                             SnackbarResult.Dismissed -> {
                                 TODO()
                             }
 
-                            SnackbarResult.ActionPerformed -> TODO()
+                            SnackbarResult.ActionPerformed -> {
+                                onEvent(MainListEvent.DeleteSnackbarActionPerformed(it.poemHeader))
+                            }
                         }
                     }
                 }
@@ -158,7 +162,10 @@ private fun SwipeBox(
 
     when (swipeState.currentValue) {
         SwipeToDismissBoxValue.EndToStart -> {
-            onDelete()
+            LaunchedEffect(swipeState) {
+                onDelete()
+                swipeState.reset()
+            }
         }
 
         SwipeToDismissBoxValue.StartToEnd -> {
