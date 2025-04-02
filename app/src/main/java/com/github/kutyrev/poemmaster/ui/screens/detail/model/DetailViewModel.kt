@@ -3,6 +3,7 @@ package com.github.kutyrev.poemmaster.ui.screens.detail.model
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.viewModelScope
 import com.github.kutyrev.poemmaster.core.BaseViewModel
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
@@ -28,14 +29,16 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
                     state.poem.text = state.poemText
                     state.poem.name = state.poemName
 
-                    state = state.copy(isEditMode = newIsEditMode, poemWords = poemWords)
+                    state = state.copy(isEditMode = false)
+                    state.poemWords.clear()
+                    state.poemWords.addAll(poemWords)
 
                     viewModelScope.launch {
                         storageRepository.updatePoem(state.poem)
                     }
                 } else {
                     state = state.copy(
-                        isEditMode = newIsEditMode,
+                        isEditMode = true,
                         numberOfOpenedWords = 0,
                         hidePercent = 0
                     )
@@ -44,17 +47,18 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
             DetailEvent.ChangeHidePercentage -> {
                 val hidePercent = changeHidePercentage(state.hidePercent)
-                val poemWords = generateAnnotatedPoem(state.poemWords, hidePercent)
+                generateAnnotatedPoem(state.poemWords, hidePercent)
                 state = state.copy(
                     hidePercent = hidePercent,
-                    numberOfOpenedWords = 0,
-                    poemWords = poemWords
+                    numberOfOpenedWords = 0
                 )
             }
 
             is DetailEvent.AnnotatedWordClick -> {
-                //TODO Fix
                 event.annotatedWord.isHided = !event.annotatedWord.isHided
+                val elementIndex = state.poemWords.indexOf(event.annotatedWord)
+                state.poemWords.remove(event.annotatedWord)
+                state.poemWords.add(elementIndex, event.annotatedWord.copy())
 
                 if (!event.annotatedWord.isHided) {
                     state = state.copy(numberOfOpenedWords = state.numberOfOpenedWords.inc())
@@ -81,9 +85,10 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
                     poem = poem,
                     poemName = poem.name,
                     poemText = poem.text,
-                    poemWords = poemWords,
                     isEditMode = poemWords.isEmpty()
                 )
+            state.poemWords.clear()
+            state.poemWords.addAll(poemWords)
         }
     }
 
@@ -93,9 +98,9 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
     }
 
     private fun generateAnnotatedPoem(
-        poemWords: List<PoemWordVisualization>,
+        poemWords: SnapshotStateList<PoemWordVisualization>,
         hidePercent: Int
-    ): List<PoemWordVisualization> {
+    ) {
         val newPoemWords = mutableListOf<PoemWordVisualization>()
         newPoemWords.addAll(poemWords)
 
@@ -111,6 +116,7 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
             newPoemWords.filter { !it.isHided }.randomOrNull()?.isHided = true
         }
 
-        return newPoemWords
+        poemWords.clear()
+        poemWords.addAll(newPoemWords)
     }
 }
