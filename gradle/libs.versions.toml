@@ -13,7 +13,7 @@ activity-version = "1.10.1"
 compose-bom = "2025.03.01"
 runtime = "1.7.8"
 room = "2.6.1"
-navigation = "2.8.8"
+navigation = "2.8.9"
 ksp = "2.0.21-1.0.27"
 serialization = "1.6.3"
 
