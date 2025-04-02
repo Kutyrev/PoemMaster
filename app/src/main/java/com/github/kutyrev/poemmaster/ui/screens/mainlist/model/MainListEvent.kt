@@ -8,4 +8,5 @@ sealed interface MainListEvent : ViewEvent {
     object AddNewPoem : MainListEvent
     class DeleteSwipePerformed(val poemHeader: PoemHeader): MainListEvent
     class DeleteSnackbarActionPerformed(val poemHeader: PoemHeader): MainListEvent
+    class DeleteSnackbarDismissed(val poemHeader: PoemHeader): MainListEvent
 }

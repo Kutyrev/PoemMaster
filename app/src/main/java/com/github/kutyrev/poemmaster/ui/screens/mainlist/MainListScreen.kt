@@ -21,6 +21,7 @@ import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListEvent
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
@@ -71,7 +72,7 @@ fun MainListScreen(
                         )
                         when (snackbarResult) {
                             SnackbarResult.Dismissed -> {
-                                TODO()
+                                onEvent(MainListEvent.DeleteSnackbarDismissed(it.poemHeader))
                             }
 
                             SnackbarResult.ActionPerformed -> {
@@ -100,7 +101,8 @@ fun MainListScreen(
                         modifier = Modifier
                             .padding(dimensionResource(id = R.dimen.padding_std))
                             .fillMaxWidth()
-                            .clickable(onClick = { onEvent(MainListEvent.GoToPoem(poem.id)) })
+                            .clickable(onClick = { onEvent(MainListEvent.GoToPoem(poem.id)) }),
+                        elevation = CardDefaults.elevatedCardElevation(defaultElevation = dimensionResource(R.dimen.elevation_std))
                     ) {
                         Text(
                             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_std)),

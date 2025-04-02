@@ -40,6 +40,13 @@ class MainListViewModel(
             is MainListEvent.DeleteSnackbarActionPerformed -> {
                 state.poemsList.add(event.poemHeader.id.toInt() - 1, event.poemHeader)
             }
+
+            is MainListEvent.DeleteSnackbarDismissed -> {
+                viewModelScope.launch {
+                    val poem = storageRepository.getPoem(event.poemHeader.id)
+                    storageRepository.deletePoem(poem)
+                }
+            }
         }
     }
 

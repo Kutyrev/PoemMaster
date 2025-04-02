@@ -33,4 +33,10 @@ class DefaultStorageRepository(
             poemMasterDao.updatePoem(poem)
         }
     }
+
+    override suspend fun deletePoem(poem: Poem) {
+        withContext(dispatcher) {
+            poemMasterDao.deletePoem(poem)
+        }
+    }
 }

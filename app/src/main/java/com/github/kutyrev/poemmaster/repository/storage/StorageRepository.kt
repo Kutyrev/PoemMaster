@@ -9,4 +9,5 @@ interface StorageRepository {
     suspend fun addNewPoem(poem: Poem): Long
     suspend fun getPoem(poemId: Long): Poem
     suspend fun updatePoem(poem: Poem)
+    suspend fun deletePoem(poem: Poem)
 }
