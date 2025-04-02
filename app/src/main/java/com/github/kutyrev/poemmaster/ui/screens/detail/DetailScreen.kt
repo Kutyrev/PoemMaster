@@ -103,6 +103,7 @@ fun DetailScreen(
                         text = stringResource(R.string.number_of_opened, numberOpened),
                         textAlign = TextAlign.Right
                     )
+                    Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))
                     Text(
                         text = buildAnnotatedString {
                             for (annotatedWord in poemWords) {
