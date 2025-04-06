@@ -14,7 +14,7 @@ android {
         applicationId = "com.github.kutyrev.poemmaster"
         minSdk = 28
         targetSdk = 35
-        versionCode = 1
+        versionCode = 3
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -58,6 +58,7 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.navigation.compose)
     implementation(libs.serialization)
+    implementation(libs.icons)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

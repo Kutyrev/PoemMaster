@@ -2,10 +2,11 @@
     <string name="app_name">Poem Master</string>
     <string name="list_fab_content_desc">Add text</string>
     <string name="back_to_list">Back to list</string>
-    <string name="edit_mode">Edit mode</string>
     <string name="snackbar_undo_button">Undo</string>
     <string name="snackbar_deleting">Deleting %1$s</string>
     <string name="number_of_opened">Number of opened words: %1$d</string>
     <string name="placeholder_title">Title</string>
     <string name="text_to_remember">Text to remember</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
 </resources>

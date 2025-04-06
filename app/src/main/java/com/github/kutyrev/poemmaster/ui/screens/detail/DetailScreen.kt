@@ -7,15 +7,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -60,15 +61,18 @@ fun DetailScreen(
                     }
                 },
                 actions = {
-                    OutlinedButton(onClick = { onEvent(DetailEvent.ChangeHidePercentage) }) {
+                    ElevatedButton(onClick = { onEvent(DetailEvent.ChangeHidePercentage) }) {
                         Text(text = hidePercent.toString().plus(" %"))
                     }
                     Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))
-                    Text(text = stringResource(R.string.edit_mode))
-                    Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))
-                    Switch(
-                        checked = isEditMode,
-                        onCheckedChange = { onEvent(DetailEvent.ChangeIsEditMode) })
+                    ElevatedButton(onClick = { onEvent(DetailEvent.ChangeIsEditMode) }) {
+                        Icon(
+                            imageVector = if (isEditMode) Icons.Default.Save else Icons.Default.Edit,
+                            contentDescription = if (isEditMode) stringResource(R.string.save) else stringResource(
+                                R.string.edit
+                            )
+                        )
+                    }
                 }
             )
         }
