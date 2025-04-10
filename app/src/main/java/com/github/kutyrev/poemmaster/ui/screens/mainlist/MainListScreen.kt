@@ -68,7 +68,7 @@ fun MainListScreen(
                                 it.poemHeader.name
                             ),
                             actionLabel = context.getString(R.string.snackbar_undo_button),
-                            duration = SnackbarDuration.Long
+                            duration = SnackbarDuration.Short
                         )
                         when (snackbarResult) {
                             SnackbarResult.Dismissed -> {
