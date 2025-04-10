@@ -40,11 +40,9 @@ android {
     buildFeatures {
         compose = true
     }
-
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -60,7 +58,13 @@ dependencies {
     implementation(libs.serialization)
     implementation(libs.icons)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.junit5.api)
+    testRuntimeOnly(libs.junit5.engine)
+    testImplementation(libs.junit5.params)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(kotlin("test"))
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

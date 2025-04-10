@@ -2,8 +2,6 @@
 agp = "8.9.1"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
@@ -17,11 +15,10 @@ navigation = "2.8.9"
 ksp = "2.0.21-1.0.27"
 serialization = "1.6.3"
 icons = "1.7.8"
+junit5 = "5.10.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -38,6 +35,10 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 navigation-compose = { group = "androidx.navigation" , name = "navigation-compose", version.ref = "navigation" }
 serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+
+junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
+junit5-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
