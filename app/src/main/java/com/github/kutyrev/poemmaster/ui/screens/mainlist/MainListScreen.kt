@@ -1,6 +1,8 @@
 package com.github.kutyrev.poemmaster.ui.screens.mainlist
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.flow.emptyFlow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -42,6 +44,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import com.github.kutyrev.poemmaster.model.PoemHeader
 import com.github.kutyrev.poemmaster.ui.screens.mainlist.model.MainListEffect
+import com.github.kutyrev.poemmaster.ui.theme.PoemMasterTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -102,7 +105,11 @@ fun MainListScreen(
                             .padding(dimensionResource(id = R.dimen.padding_std))
                             .fillMaxWidth()
                             .clickable(onClick = { onEvent(MainListEvent.GoToPoem(poem.id)) }),
-                        elevation = CardDefaults.elevatedCardElevation(defaultElevation = dimensionResource(R.dimen.elevation_std))
+                        elevation = CardDefaults.elevatedCardElevation(
+                            defaultElevation = dimensionResource(
+                                R.dimen.elevation_std
+                            )
+                        )
                     ) {
                         Text(
                             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_std)),
@@ -180,3 +187,48 @@ private fun SwipeBox(
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun MainListScreenPreview() {
+    val samplePoemsList = listOf(
+        PoemHeader(id = 1, name = "Poem One"),
+        PoemHeader(id = 2, name = "Poem Two"),
+        PoemHeader(id = 3, name = "Poem Three")
+    )
+
+    val noOpOnEvent: (MainListEvent) -> Unit = {}
+
+    val noOpGoToPoemScreen: (Long) -> Unit = {}
+    PoemMasterTheme {
+        MainListScreen(
+            poemsList = samplePoemsList,
+            effectFlow = remember { emptyFlow() },
+            onEvent = noOpOnEvent,
+            goToPoemScreen = noOpGoToPoemScreen
+        )
+    }
+}
+
+@Preview(showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun MainListScreenPreviewDark() {
+    val samplePoemsList = listOf(
+        PoemHeader(id = 1, name = "Poem One"),
+        PoemHeader(id = 2, name = "Poem Two"),
+        PoemHeader(id = 3, name = "Poem Three")
+    )
+
+    val noOpOnEvent: (MainListEvent) -> Unit = {}
+
+    val noOpGoToPoemScreen: (Long) -> Unit = {}
+    PoemMasterTheme {
+        MainListScreen(
+            poemsList = samplePoemsList,
+            effectFlow = remember { emptyFlow() },
+            onEvent = noOpOnEvent,
+            goToPoemScreen = noOpGoToPoemScreen
+        )
+    }
+}
+

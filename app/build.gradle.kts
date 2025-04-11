@@ -58,6 +58,9 @@ dependencies {
     implementation(libs.serialization)
     implementation(libs.icons)
 
+    debugImplementation(libs.compose.tooling)
+    implementation(libs.compose.tooling.preview)
+
     testImplementation(libs.junit5.api)
     testRuntimeOnly(libs.junit5.engine)
     testImplementation(libs.junit5.params)
