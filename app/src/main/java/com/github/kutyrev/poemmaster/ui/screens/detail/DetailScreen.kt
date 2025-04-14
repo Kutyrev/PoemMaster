@@ -60,7 +60,9 @@ fun DetailScreen(
                     }
                 },
                 actions = {
-                    ElevatedButton(onClick = { onEvent(DetailEvent.ChangeHidePercentage) }) {
+                    ElevatedButton(
+                        enabled = !isEditMode,
+                        onClick = { onEvent(DetailEvent.ChangeHidePercentage) }) {
                         Text(text = hidePercent.toString().plus(" %"))
                     }
                     Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std)))

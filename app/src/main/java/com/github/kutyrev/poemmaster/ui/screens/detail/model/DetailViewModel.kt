@@ -31,7 +31,7 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
                     state.poem.text = state.poemText
                     state.poem.name = state.poemName
 
-                    state = state.copy(isEditMode = false)
+                    state = state.copy(isEditMode = false, numberOfOpenedWords = 0, hidePercent = 0)
                     state.poemWords.clear()
                     state.poemWords.addAll(poemWords)
 
@@ -123,19 +123,23 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
     private fun splitPoem(poemText: String): List<PoemWordVisualization> {
         val regex = Regex(POEM_SPLIT_REGEX)
-        val parts= poemText.split(SPACE, LINE_FEED)
+        val parts = poemText.split(SPACE, LINE_FEED)
         val delimiters = regex.findAll(poemText).map { it.value }.toList()
 
         val dividedPoem = mutableListOf<PoemWordVisualization>()
 
         for ((i, part) in parts.withIndex()) {
-            if (i == parts.lastIndex) dividedPoem.add(
-                PoemWordVisualization(
-                    part,
-                    false,
-                    ""
-                )
-            )
+            if (i == parts.lastIndex) {
+                if (part.isNotEmpty()) {
+                    dividedPoem.add(
+                        PoemWordVisualization(
+                            part,
+                            false,
+                            ""
+                        )
+                    )
+                }
+            }
             else
                 dividedPoem.add(PoemWordVisualization(part, false, delimiters[i]))
         }
