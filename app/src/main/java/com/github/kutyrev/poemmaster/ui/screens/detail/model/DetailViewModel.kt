@@ -11,6 +11,8 @@ import com.github.kutyrev.poemmaster.repository.storage.StorageRepository
 import kotlinx.coroutines.launch
 
 const val SPACE = " "
+const val LINE_FEED = "\n"
+const val POEM_SPLIT_REGEX = "\\s|\\n"
 
 class DetailViewModel(private val storageRepository: StorageRepository) :
     BaseViewModel<DetailEvent, DetailEffect>() {
@@ -25,7 +27,7 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
                 if (newIsEditMode == false) {
                     val poemWords: List<PoemWordVisualization> =
-                        state.poemText.split(SPACE).map { PoemWordVisualization(it) }
+                        splitPoem(state.poemText)
                     state.poem.text = state.poemText
                     state.poem.name = state.poemName
 
@@ -78,8 +80,7 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
     fun loadPoem(poemId: Long) {
         viewModelScope.launch {
             val poem = storageRepository.getPoem(poemId)
-            val poemWords: List<PoemWordVisualization> =
-                poem.text.split(SPACE).filter { it.isNotEmpty() }.map { PoemWordVisualization(it) }
+            val poemWords: List<PoemWordVisualization> = splitPoem(poem.text)
             state =
                 state.copy(
                     poem = poem,
@@ -118,5 +119,26 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
 
         poemWords.clear()
         poemWords.addAll(newPoemWords)
+    }
+
+    private fun splitPoem(poemText: String): List<PoemWordVisualization> {
+        val regex = Regex(POEM_SPLIT_REGEX)
+        val parts= poemText.split(SPACE, LINE_FEED)
+        val delimiters = regex.findAll(poemText).map { it.value }.toList()
+
+        val dividedPoem = mutableListOf<PoemWordVisualization>()
+
+        for ((i, part) in parts.withIndex()) {
+            if (i == parts.lastIndex) dividedPoem.add(
+                PoemWordVisualization(
+                    part,
+                    false,
+                    ""
+                )
+            )
+            else
+                dividedPoem.add(PoemWordVisualization(part, false, delimiters[i]))
+        }
+        return dividedPoem
     }
 }

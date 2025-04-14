@@ -32,7 +32,6 @@ import androidx.compose.ui.text.withLink
 import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
-import com.github.kutyrev.poemmaster.ui.screens.detail.model.SPACE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -111,17 +110,22 @@ fun DetailScreen(
                     Text(
                         text = buildAnnotatedString {
                             for (annotatedWord in poemWords) {
-                                val textStyle =
-                                    if (annotatedWord.isHided) SpanStyle(
-                                        background = MaterialTheme.colorScheme.onBackground
-                                    ) else SpanStyle()
-                                withLink(
-                                    LinkAnnotation.Clickable(
-                                        tag = annotatedWord.word,
-                                        styles = TextLinkStyles(style = textStyle)
-                                    ) { onEvent(DetailEvent.AnnotatedWordClick(annotatedWord)) }) {
-                                    append(annotatedWord.word + SPACE)
+                                if (annotatedWord.word.isNotEmpty()) {
+                                    val textStyle =
+                                        if (annotatedWord.isHided) SpanStyle(
+                                            background = MaterialTheme.colorScheme.onBackground
+                                        ) else SpanStyle()
+                                    withLink(
+                                        LinkAnnotation.Clickable(
+                                            tag = annotatedWord.word,
+                                            styles = TextLinkStyles(style = textStyle)
+                                        ) {
+                                            onEvent(DetailEvent.AnnotatedWordClick(annotatedWord))
+                                        }) {
+                                        append(annotatedWord.word)
+                                    }
                                 }
+                                append(annotatedWord.delimeter)
                             }
                         }
                     )
