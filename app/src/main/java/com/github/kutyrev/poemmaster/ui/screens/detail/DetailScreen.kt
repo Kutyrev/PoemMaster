@@ -29,9 +29,11 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.tooling.preview.Preview
 import com.github.kutyrev.poemmaster.R
 import com.github.kutyrev.poemmaster.model.PoemWordVisualization
 import com.github.kutyrev.poemmaster.ui.screens.detail.model.DetailEvent
+import com.github.kutyrev.poemmaster.ui.theme.PoemMasterTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -134,5 +136,69 @@ fun DetailScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DetailScreenPreview() {
+    val mockPoemWords = listOf(
+        PoemWordVisualization(
+            word = "Mock",
+            isHided = false,
+            delimeter = " "
+        ),
+        PoemWordVisualization(
+            word = "Word",
+            isHided = true,
+            delimeter = ""
+        )
+    )
+    val mockPoemText = "This is a preview of the poem."
+    val mockPoemName = "Mock Poem"
+
+    PoemMasterTheme {
+        DetailScreen(
+            poemName = mockPoemName,
+            poemWords = mockPoemWords,
+            poemText = mockPoemText,
+            isEditMode = false,
+            hidePercent = 50,
+            numberOpened = 1,
+            onEvent = {},
+            goBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun DetailScreenPreviewDark() {
+    val mockPoemWords = listOf(
+        PoemWordVisualization(
+            word = "Mock",
+            isHided = false,
+            delimeter = " "
+        ),
+        PoemWordVisualization(
+            word = "Word",
+            isHided = true,
+            delimeter = ""
+        )
+    )
+    val mockPoemText = "This is a preview of the poem."
+    val mockPoemName = "Mock Poem"
+
+    PoemMasterTheme {
+        DetailScreen(
+            poemName = mockPoemName,
+            poemWords = mockPoemWords,
+            poemText = mockPoemText,
+            isEditMode = false,
+            hidePercent = 50,
+            numberOpened = 1,
+            onEvent = {},
+            goBack = {}
+        )
     }
 }
