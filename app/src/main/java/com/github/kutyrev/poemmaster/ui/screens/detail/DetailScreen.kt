@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
@@ -96,7 +98,8 @@ fun DetailScreen(
                     TextField(
                         modifier = Modifier
                             .padding(dimensionResource(R.dimen.padding_std))
-                            .fillMaxSize(),
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
                         value = poemText,
                         placeholder = {
                             Text(stringResource(R.string.text_to_remember))
@@ -104,7 +107,10 @@ fun DetailScreen(
                         onValueChange = { onEvent(DetailEvent.ChangePoemText(it)) })
                 }
             } else {
-                Column(modifier = Modifier.padding(dimensionResource(R.dimen.padding_std))) {
+                Column(
+                    modifier = Modifier
+                        .padding(dimensionResource(R.dimen.padding_std))
+                ) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(R.string.number_of_opened, numberOpened),
@@ -131,7 +137,8 @@ fun DetailScreen(
                                 }
                                 append(annotatedWord.delimeter)
                             }
-                        }
+                        },
+                        modifier = Modifier.verticalScroll(rememberScrollState())
                     )
                 }
             }
