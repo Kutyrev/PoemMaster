@@ -123,8 +123,11 @@ fun DetailScreen(
                                 if (annotatedWord.word.isNotEmpty()) {
                                     val textStyle =
                                         if (annotatedWord.isHided) SpanStyle(
-                                            background = MaterialTheme.colorScheme.onBackground
-                                        ) else SpanStyle()
+                                            background = MaterialTheme.colorScheme.onBackground,
+                                            fontSize = MaterialTheme.typography.titleLarge.fontSize
+                                        ) else SpanStyle(
+                                            fontSize = MaterialTheme.typography.titleLarge.fontSize
+                                        )
                                     withLink(
                                         LinkAnnotation.Clickable(
                                             tag = annotatedWord.word,
