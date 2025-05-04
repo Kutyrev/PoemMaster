@@ -74,6 +74,20 @@ class DetailViewModel(private val storageRepository: StorageRepository) :
             is DetailEvent.ChangePoemText -> {
                 state = state.copy(poemText = event.text)
             }
+
+            DetailEvent.CancelIsEditMode -> {
+                val poemWords: List<PoemWordVisualization> = splitPoem(state.poem.text)
+                state =
+                    state.copy(
+                        poemText = state.poem.text,
+                        poemName = state.poem.name,
+                        isEditMode = false,
+                        numberOfOpenedWords = 0,
+                        hidePercent = 0
+                    )
+                state.poemWords.clear()
+                state.poemWords.addAll(poemWords)
+            }
         }
     }
 
