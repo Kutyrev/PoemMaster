@@ -11,7 +11,6 @@ fun DetailRoute(
     goBack: () -> Unit,
     viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
 ) {
-
     LaunchedEffect(Unit) {
         viewModel.loadPoem(poemId)
     }

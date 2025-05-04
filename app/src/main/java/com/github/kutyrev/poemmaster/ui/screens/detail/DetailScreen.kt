@@ -56,7 +56,7 @@ fun DetailScreen(
                     Text(poemName)
                 },
                 navigationIcon = {
-                    IconButton(onClick = goBack) {
+                    IconButton(onClick = { if (isEditMode) onEvent(DetailEvent.ChangeIsEditMode) else goBack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.back_to_list)
